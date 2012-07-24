@@ -1,0 +1,159 @@
+.TH IOPING "1" "July 2011" "" "User Commands"
+.SH NAME
+ioping \- simple disk I/O latency monitoring tool
+.SH SYNOPSYS
+.SY ioping
+.OP \-LCDRq
+.OP \-c count
+.OP \-w deadline
+.OP \-p period
+.OP \-i interval
+.OP \-s size
+.OP \-S wsize
+.OP \-o offset
+.IR device | file | directory
+.YS
+.SY ioping
+.B -h
+|
+.B -v
+.YS
+.SH DESCRIPTION
+This tool lets you monitor I/O latency in real time.
+.SH OPTIONS
+.TP
+.BI \-c \ count
+Stop after \fIcount\fR requests.
+.TP
+.BI \-w \ deadline
+Stop after \fIdeadline\fR time passed.
+.TP
+.BI \-p \ period
+Print raw statistics for every \fIperiod\fR requests.
+.TP
+.BI \-i \ interval
+Set time between requests to \fIinterval\fR (\fB1s\fR).
+.TP
+.BI \-s \ size
+Request size (\fB4k\fR).
+.TP
+.BI \-S \ size
+Working set size (\fB1m\fR).
+.TP
+.BI \-o \ offset
+Offset in input file.
+.TP
+.B \-L
+Use sequential operations rather than random. This also sets request size
+to \fB256k\fR (as in \fB-s 256k\fR).
+.TP
+.B \-C
+Use cached I/O.
+.TP
+.B \-D
+Use direct I/O.
+.TP
+.B \-R
+Disk seek rate test (same as \fB-q -i 0 -w 3 -S 64m\fR).
+.TP
+.B \-q
+Suppress human-readable output.
+.TP
+.B \-h
+Display help message and exit.
+.TP
+.B \-v
+Display version and exit.
+.SS Argument suffixes
+For options that expect time argument (\fB\-i\fR and \fB\-w\fR),
+default is seconds, unless you specify one of the following suffixes
+(case-insensitive):
+.TP
+.BR us ,\  usec
+microseconds
+.TP
+.BR ms ,\  msec
+milliseconds
+.TP
+.BR s ,\  sec
+seconds
+.TP
+.BR m ,\  min
+minutes
+.TP
+.BR h ,\  hour
+hours
+.PP
+For options that expect "size" argument (\fB\-s\fR, \fB\-S\fR and \fB\-o\fR),
+default is bytes, unless you specify one of the following suffixes
+(case-insensitive):
+.TP
+.B s
+disk sectors (a sector is always 512).
+.TP
+.BR k ,\  kb
+kilobytes
+.TP
+.B p
+memory pages (a page is always 4K).
+.TP
+.BR m ,\  mb
+megabytes
+.TP
+.BR g ,\  gb
+gigabytes
+.TP
+.BR t ,\  tb
+terabytes
+.PP
+For options that expect "number" argument (\fB-p\fR and \fB-c\fR) you
+can optionally specify one of the following suffixes (case-insensitive):
+.TP
+.B k
+kilo (thousands, 1 000)
+.TP
+.B m
+mega (millions, 1 000 000)
+.TP
+.B g
+giga (billions, 1 000 000 000)
+.TP
+.B t
+tera (trillions, 1 000 000 000 000)
+.SH EXIT STATUS
+Returns \fB0\fR upon success. The following error codes are defined:
+.TP
+.B 1
+Invalid usage (error in arguments).
+.TP
+.B 2
+Error during preparation stage.
+.TP
+.B 3
+Error during runtime.
+.SH EXAMPLES
+.TP
+.B ioping .
+Show disk I/O latency using the default values and the current directory,
+until interrupted.
+.TP
+.B ioping -c 10 -s 1M /tmp
+Measure latency on \fB/tmp\fR using 10 requests of 1 megabyte each.
+.TP
+.B ioping -R /dev/sda
+Measure disk seek rate.
+.TP
+.B ioping -RL /dev/sda
+Measure disk sequential speed.
+.SH SEE ALSO
+Homepage
+.UR http://code.google.com/p/ioping/
+.UE .
+.SH AUTHORS
+This program was written by Konstantin Khlebnikov
+.MT koct9i@gmail.com
+.ME .
+.YS
+Man-page was written by Kir Kolyshkin
+.MT kir@openvz.org
+.ME .
