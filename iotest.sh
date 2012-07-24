@@ -18,3 +18,7 @@ ioping . -c 10
 echo "test exaustivo de /home/"
 
 ioping /home/ -R
+
+echo "Prueba de rendimiento con dd de generacion de un fichero de 1 giga."
+
+dd if=/dev/zero of=test bs=64k count=16k conv=fdatasync
