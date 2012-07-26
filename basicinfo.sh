@@ -10,16 +10,19 @@ echo "Cpu Info"
 echo "**********************************"
 cat /proc/cpuinfo
 sleep 3
+echo "**********************************"
 
 echo "Mem Info"
 echo "**********************************"
 cat /proc/meminfo
 sleep 3
+echo "**********************************"
 
 echo "Disk info"
 echo "**********************************"
 df -i
 sleep 3
+echo "**********************************"
 
 echo "Check Load system"
 echo "**********************************"
