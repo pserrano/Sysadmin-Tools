@@ -3,7 +3,8 @@
 # Script for show basic info for new systems
 # By Pablo Serrano 
 # 
-# Please execute this script with root login
+# Version 1.0
+# Please execute this script with root login 
 
 
 echo "Cpu Info"
